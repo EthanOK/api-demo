@@ -23,10 +23,16 @@ export default async function handler(request, response) {
  */
 async function handlePost(request, response) {
   const { name, password } = request.body;
+  if (!name || !password) {
+    return response
+      .status(400)
+      .json({ error: "name and password are required" });
+  }
+
   return response.status(200).json({
     status: "success",
-    name: name || "",
-    password: password || "",
+    name: name,
+    password: password,
   });
 }
 
